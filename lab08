@@ -1,0 +1,99 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class SinglyLinkedList {
+    Node head;
+
+    // Add a node to the end of the list
+    void add(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    // Traverse list and print elements
+    void printList() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    // Sum all elements in the list
+    int sum() {
+        int total = 0;
+        Node current = head;
+        while (current != null) {
+            total += current.data;
+            current = current.next;
+        }
+        return total;
+    }
+}
+
+public class PrimeDigitThree {
+    // Check if a number is prime
+    public static boolean isPrime(int num) {
+        if (num < 2) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        for (int i = 3; i <= Math.sqrt(num); i += 2) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+    // Check if number contains the digit '3'
+    public static boolean containsThree(int num) {
+        return String.valueOf(num).contains("3");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter n (less than 1,000,000): ");
+        int n = sc.nextInt();
+        if (n >= 1000000) {
+            System.out.println("n must be less than 1,000,000");
+            return;
+        }
+
+        SinglyLinkedList primes = new SinglyLinkedList();
+        SinglyLinkedList primesWithThree = new SinglyLinkedList();
+
+        // Populate primes
+        for (int i = 0; i <= n; i++) {
+            if (isPrime(i)) {
+                primes.add(i);
+                if (containsThree(i)) {
+                    primesWithThree.add(i);
+                }
+            }
+        }
+
+        // Print primes with '3'
+        System.out.print("Prime numbers containing '3': ");
+        primesWithThree.printList();
+
+        // Calculate sum
+        int sum = primesWithThree.sum();
+        System.out.println("Sum of prime numbers containing '3': " + sum);
+    }
+}

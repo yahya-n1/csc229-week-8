@@ -1,0 +1,60 @@
+1)
+i = n;
+while (i > 1) {
+    j = i;
+    while (j < n) {
+        k = 0;
+        while (k < n) {
+            k = k + 2;
+        }
+        j = j * 2;
+    }
+    i = i / 2;
+}
+
+Outer loop (i): runs about log n times
+
+
+Middle loop (j): runs about log(n/i) times for each i
+
+
+Inner loop (k): runs O(n) times
+
+
+Total work:
+ T(n) = Σ n · log(n/i) = O(n (log n)²)
+Answer: Θ(n (log n)²)
+2)
+Statement:
+ “You cannot find two functions f(n) and g(n) where f(n) ≤ O(g(n)) and f(n) ≥ Ω(g(n)).”
+This is false because if both hold, then f(n) = Θ(g(n)).
+ Example:
+ f(n) = 2n, g(n) = n ⇒ f(n) = Θ(n)
+Answer: False — such functions do exist.
+3)
+a = 3, b = 4 → n^(log₄3) ≈ n⁰·⁷⁹
+
+
+Compare f(n)=n
+ → n > n⁰·⁷⁹ → Case 3 of Master Theorem
+
+
+Answer: T(n) = Θ(n)
+4)
+a = 8, b = 6 → n^(log₆8) ≈ n¹·¹⁶
+
+
+Compare f(n)=n⁰·⁵
+ → f(n) grows slower → Case 1
+
+
+Answer: T(n) = Θ(n¹·¹⁶)
+5)
+Rewritten: T(n)=3T(n/(5/3)) + n
+ → a = 3, b = 5/3
+ → n^(log_{5/3}3) ≈ n²·¹⁵
+ Compare f(n)=n
+ → f(n) smaller → Case 1
+Answer: T(n) = Θ(n²·¹⁵)
+
+

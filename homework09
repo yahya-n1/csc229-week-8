@@ -1,0 +1,38 @@
+// Method to find the number of divisors for a given number
+public static int countDivisors(long number) {
+    int count = 0;
+    long sqrt = (long) Math.sqrt(number);
+
+    for (long i = 1; i <= sqrt; i++) {
+        if (number % i == 0) {
+            // Each divisor below sqrt has a corresponding one above sqrt
+            if (i * i == number) {
+                count++;
+            } else {
+                count += 2;
+            }
+        }
+    }
+    return count;
+}
+
+// Method to find the first triangle number with over a given number of divisors
+public static long findTriangleNumberWithDivisors(int divisorLimit) {
+    long n = 1;
+    long triangleNumber = 1;
+
+    while (true) {
+        int divisors = countDivisors(triangleNumber);
+        if (divisors > divisorLimit) {
+            return triangleNumber;
+        }
+
+        n++;
+        triangleNumber += n; // Generate next triangle number
+    }
+}
+
+public static void main(String[] args) {
+    long result = findTriangleNumberWithDivisors(100);
+    System.out.println("The first triangle number with over 100 divisors is: " + result);
+}
